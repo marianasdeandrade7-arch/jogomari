@@ -1,0 +1,300 @@
+:root{
+	--bg1:#05060a;
+	--bg2:#0f0f14;
+	--panel:#0b0b0d;
+	--accent:#6b4cff;
+	--muted:#9aa0a6;
+	--danger:#bf3b3b;
+}
+html,body{
+	height:100%;
+	margin:0;
+	font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;
+	background:linear-gradient(180deg,var(--bg1),var(--bg2));
+	color:#e6e9ee;
+}
+.container{
+	max-width:1000px;
+	margin:48px auto;
+	padding:28px;
+	display:flex;
+	gap:24px;
+}
+.card{
+	background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+	border:1px solid rgba(255,255,255,0.03);
+	box-shadow:0 6px 30px rgba(0,0,0,0.6);
+	border-radius:12px;
+	padding:20px;
+}
+.form-panel{flex:1;min-width:320px}
+h1{
+	margin:0 0 12px;
+	font-size:22px;
+	letter-spacing:1px;
+	color:var(--accent);
+	text-shadow:0 2px 8px rgba(107,76,255,0.14);
+}
+.field{display:flex;flex-direction:column;margin-bottom:12px}
+label{font-size:13px;color:var(--muted);margin-bottom:6px}
+input[type="text"],input[type="number"],input[type="url"]{
+	background:transparent;
+	border:1px solid rgba(255,255,255,0.06);
+	padding:10px;
+	border-radius:8px;
+	color:inherit;
+}
+.row{display:flex;gap:8px}
+.row .field{flex:1}
+.buttons{display:flex;gap:10px;margin-top:12px}
+button{
+	background:var(--accent);
+	border:none;
+	color:#fff;
+	padding:10px 14px;
+	border-radius:8px;
+	cursor:pointer;
+	box-shadow:0 6px 18px rgba(107,76,255,0.12);
+}
+button.ghost{
+	background:transparent;
+	border:1px solid rgba(255,255,255,0.04);
+	color:var(--muted);
+}
+.preview{
+	width:360px;
+	flex-shrink:0;
+	padding:18px;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	gap:12px;
+}
+.preview .portrait{
+	width:160px;
+	height:160px;
+	border-radius:12px;
+	background-size:cover;
+	background-position:center;
+	border:1px solid rgba(255,255,255,0.04);
+	box-shadow:inset 0 -20px 40px rgba(0,0,0,0.6);
+}
+.stat-list{
+	width:100%;
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	gap:8px;
+	margin-top:8px;
+}
+.stat{
+	background:rgba(255,255,255,0.02);
+	padding:8px;
+	border-radius:8px;
+	font-size:13px;
+	display:flex;
+	justify-content:space-between;
+}
+.note{font-size:12px;color:var(--muted);margin-top:8px;text-align:center}
+.footer{margin-top:18px;font-size:12px;color:var(--muted);text-align:center}
+@media(max-width:860px){
+	.container{flex-direction:column;padding:16px}
+	.preview{width:100%}
+}
+
+/* painél de escolha de personagens (imagens pequenas, lado a lado, alinhadas) */
+.hero-choices{
+	margin:12px 0 16px;
+	padding:8px;
+	border-radius:8px;
+	background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
+	border:1px solid rgba(255,255,255,0.02);
+}
+.hero-choices h3{margin:0 0 8px;color:var(--muted);font-size:14px}
+
+/* grid de 3 colunas para thumbnails iguais */
+.heroes{
+	display:grid;
+	grid-template-columns:repeat(3, 1fr);
+	gap:12px;
+	align-items:start;
+}
+
+/* botões pequenos e uniformes */
+.hero-btn{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	gap:6px;
+	padding:6px;
+	border-radius:8px;
+	background:transparent;
+	border:1px solid rgba(255,255,255,0.04);
+	cursor:pointer;
+	height:auto;
+	min-height:0;
+	transition:transform .12s, box-shadow .12s, border-color .12s;
+	outline: none;
+	width:100%;
+}
+
+/* thumbnail fixa e centrada, mantém proporção */
+.hero-thumb{
+	width:100%;
+	max-width:100px;     /* controla tamanho */
+	max-height:100px;    /* controla altura */
+	object-fit:contain;  /* preserva imagem sem cortar */
+	border-radius:6px;
+	display:block;
+}
+
+/* nome pequeno embaixo do thumbnail */
+.hero-btn span{
+	font-size:12px;
+	color:#e6e9ee;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	width:100%;
+	text-align:center;
+}
+
+/* hover / foco / seleção */
+.hero-btn:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,0.6);border-color:rgba(107,76,255,0.12)}
+.hero-btn:focus{box-shadow:0 0 0 3px rgba(107,76,255,0.08);border-color:var(--accent)}
+.hero-btn.selected, .hero-btn[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 10px 30px rgba(107,76,255,0.12);transform:translateY(-4px)}
+
+/* responsivo: em telas pequenas virar 1 coluna, em médio 2 colunas */
+@media (max-width:720px){
+	.heroes{grid-template-columns:repeat(1, 1fr)}
+}
+@media (min-width:721px) and (max-width:980px){
+	.heroes{grid-template-columns:repeat(2, 1fr)}
+}
+
+/* style para o indicador de pontos restantes */
+#pointsInfo{margin:6px 0 0}
+#pointsInfo strong{color:var(--accent);font-weight:600}
+
+/* estilos para página de lore (standalone) */
+.lore-page{height:100vh;margin:0}
+.lore-full{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}
+.lore-full .lore-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.45) saturate(0.9);z-index:0}
+.lore-container{position:relative;z-index:2;max-width:900px;width:100%;padding:28px;border-radius:12px;background:linear-gradient(180deg, rgba(3,3,6,0.6), rgba(8,6,10,0.65));box-shadow:0 24px 80px rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.03);color:#fff}
+.lore-container .lore-title{color:var(--accent);margin:0 0 12px;text-align:center}
+.lore-viewport{height:320px;overflow:hidden}
+.lore-text{line-height:1.6;font-size:16px;text-align:left;padding:0 12px;animation: loreScroll 18s linear forwards;}
+@keyframes loreScroll{0%{transform:translateY(100%);opacity:0}10%{opacity:1}100%{transform:translateY(-120%);opacity:1}}
+@media(max-width:720px){.lore-viewport{height:260px}.lore-text{font-size:15px}}
+
+/* health bar */
+.hp-bar{
+	width:100%;
+	height:12px;
+	background:rgba(255,255,255,0.06);
+	border-radius:8px;
+	overflow:hidden;
+	margin:8px 0 6px;
+	border:1px solid rgba(0,0,0,0.25);
+}
+.hp-fill{
+	height:100%;
+	width:100%;
+	background:linear-gradient(90deg,#66ff88,#2ad14b);
+	transition:width .28s ease-in-out;
+}
+
+/* pequenas melhorias de layout dos combat-box para ficarem alinhados lado a lado */
+.combat-box{display:flex;flex-direction:column;align-items:center;gap:8px}
+.combat-box .stat-line{width:100%;font-size:13px;color:#dfe6f3;display:flex;justify-content:space-between;padding:0 6px}
+.enemy-box .hp-fill{background:linear-gradient(90deg,#ff8a8a,#ff5454)} /* inimigo vermelho */
+.player-box .hp-fill{background:linear-gradient(90deg,#66b3ff,#2a7bff)} /* jogador azul */
+
+/* Garantir boxes lado a lado e tamanhos adequados */
+.battle-top{
+	display:flex;
+	flex-direction:row;
+	flex-wrap:nowrap;
+	gap:20px;
+	justify-content:space-between;
+	align-items:flex-start;
+}
+
+/* duas colunas lado a lado ocupando ~50% cada uma */
+.combat-box{
+	width:48%;
+	min-width:260px;
+	max-width:520px;
+	box-sizing:border-box;
+}
+
+/* imagens proporcionais e menores para caber lado a lado */
+.combat-box img{
+	width:140px;
+	height:140px;
+	object-fit:contain;
+	border-radius:8px;
+}
+
+/* responsivo: em telas pequenas empilha verticalmente */
+@media (max-width:860px){
+	.battle-top{
+		flex-direction:column;
+		flex-wrap:wrap;
+	}
+	.combat-box{
+		width:100%;
+		max-width:none;
+	}
+	.combat-box img{
+		width:120px;
+		height:120px;
+	}
+}
+
+/* cena de vitória / Salvar Eldoria */
+.victory-overlay{
+	position:fixed;
+	inset:0;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(240,246,255,0.95));
+	z-index:9999;
+	padding:28px;
+}
+.victory-bg{
+	position:absolute;
+	inset:0;
+	/* imagem de fundo usada na cena de vitória */
+	background-image: url('https://i.pinimg.com/1200x/e0/3b/07/e03b07baacbfe809680d2c2c3bfd09a8.jpg');
+	background-size:cover;
+	background-position:center;
+	/* escurece ligeiramente para melhorar contraste do painel */
+	background-repeat:no-repeat;
+	filter:brightness(0.72) saturate(0.95);
+	opacity:1;
+	z-index:0;
+}
+
+/* painel sobre a imagem (leve blur/contraste) */
+.victory-panel{
+	position:relative;z-index:2;
+	max-width:900px;width:100%;padding:28px;border-radius:12px;
+	background:rgba(255,255,255,0.85);color:#0b1a2b;text-align:center;
+	box-shadow:0 24px 80px rgba(10,20,30,0.08);border:1px solid rgba(10,20,30,0.04);
+}
+.victory-title{color:#2a7bff;margin:0 0 12px;font-size:28px}
+.victory-portrait{width:140px;height:140px;border-radius:10px;object-fit:cover;margin:6px auto}
+.victory-hero{margin:8px 0 6px;font-size:20px;color:#0b2a4a}
+.victory-text{max-width:820px;margin:0 auto;color:#163047;line-height:1.5;font-size:16px}
+
+/* botões */
+.victory-panel button{background:#2a7bff;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+.victory-panel button.ghost{background:transparent;border:1px solid rgba(10,20,30,0.06);color:#0b2a4a}
+
+/* responsivo */
+@media (max-width:720px){
+	.victory-panel{padding:18px}
+	.victory-text{font-size:15px}
+	.victory-portrait{width:120px;height:120px}
+}
